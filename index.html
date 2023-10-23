@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="square">
+        <p class="boxTitle">Chefly AI</p>
+        <input type="text" class="name-input" id="nameInput" placeholder="Enter your name">
+        <a href="page1.html" class="continue-button" id="continueButton">Continue</a>
+    </div>
+
+    <script>
+        // JavaScript for capturing the input value and storing it in local storage
+        const nameInput = document.getElementById('nameInput');
+        const continueButton = document.getElementById('continueButton');
+        
+        continueButton.addEventListener('click', function() {
+            const name = nameInput.value;
+            localStorage.setItem('name', name);
+        });
+    </script>
+</body>
+</html>

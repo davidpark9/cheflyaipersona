@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+</head>
+<body>
+    <div class="square"> 
+        <p class="boxTitle">User Profile</p>
+        
+        <div id="profileContainer" class="profile-container">
+            <div class="profile-item">
+                <p class="profile-title">Name:</p>
+                <p id="nameDisplay" class="profile-value"></p>
+            </div>
+            <div class="profile-item">
+                <p class="profile-title">Cuisine Preference:</p>
+                <p id="cuisinePreference" class="profile-value"></p>
+            </div>
+            <div class="profile-item">
+                <p class="profile-title">Meal Preference:</p>
+                <p id="mealPreference" class="profile-value"></p>
+            </div>
+            <div class="profile-item">
+                <p class="profile-title">Machine Preferences:</p>
+                <p id="machinePreference" class="profile-value"></p>
+            </div>
+        </div>
+        <a href="page1.html" class="continue-button" id="goBackButton">Go Back</a>
+
+
+    </div>
+
+    <script>
+        const profileContainer = document.getElementById('profileContainer');
+        const nameDisplay = document.getElementById('nameDisplay');
+        const cuisinePreference = document.getElementById('cuisinePreference');
+        const mealPreference = document.getElementById('mealPreference');
+        const machinePreference = document.getElementById('machinePreference');
+
+        const storedName = localStorage.getItem('name');
+        const storedCuisinePreference = localStorage.getItem('cuisinePreference');
+        const storedMealPreference = localStorage.getItem('mealPreference');
+        const storedMachinePreference = localStorage.getItem('machinePreference');
+
+        if (storedName) {
+            nameDisplay.textContent = storedName;
+        }
+        if (storedCuisinePreference) {
+            cuisinePreference.textContent = storedCuisinePreference;
+        }
+        if (storedMealPreference) {
+            mealPreference.textContent = storedMealPreference;
+        }
+        if (storedMachinePreference) {
+            const machinePreferences = JSON.parse(storedMachinePreference);
+            machinePreference.textContent = machinePreferences.join(', ');
+        }
+    </script>
+</body>
+</html>

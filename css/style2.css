@@ -1,0 +1,83 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../imgs/slice.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.square {
+    width: 100%; 
+    max-width: 800px; 
+    background-color: #f7f7f7;
+    opacity: 75%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto; 
+}
+
+
+.boxTitle {
+    color: darkorange;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+#profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-item {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Style the profile values */
+.profile-value {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+#goBackButton {
+    position: absolute;
+    margin-top: 30px;
+    margin-right: 40px;
+    padding: 10px 20px; 
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    align-self: flex-start; 
+    text-decoration: none;
+}
+
+
+#goBackButton:hover {
+    background-color: #ff9933; 
+}

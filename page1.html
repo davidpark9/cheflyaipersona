@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/fakeData.js"></script>
+</head>
+<body>
+    <div class="square"> 
+        <p class="boxTitle">Chefly AI Bot</p>
+        
+        <div id="nameContainer" class="name-container">
+            <p id="nameDisplay" class="name-display"></p>
+        </div>
+        <div id="containerWrapper">
+            <div class="preferences-container">
+                <div id="cuisineContainer" class="cuisine-container">
+                    <label for="cuisinePreferences">
+                        <p id="cuisineTitle" class="cuisine-title">Cuisine Preferences:</p>
+                    </label>
+                    <select id="cuisinePreferences" onchange="populateMealsDropdown()"></select>
+                </div>
+
+                <div id="machineContainer" class="cuisine-container">
+                    <label for="machinePreferences">
+                        <p id="machineTitle" class="cuisine-title">Machine Preferences:</p>
+                    </label>
+                    <div class="checkbox-group" id="machinePreferences"></div>
+                </div>
+                
+            </div>
+            <div id="mealsContainer" class="cuisine-container">
+                <label for="mealsList">
+                    <p id="mealsTitle" class="cuisine-title">Select a Meal:</p>
+                </label>
+                <select id="mealsList" class="cuisine-dropdown"></select>
+            </div>
+        </div>
+
+        <a href="page2.html" class="continue-button" id="continueButton">Continue</a>
+    </div>
+
+    <script>
+        const nameContainer = document.getElementById('nameContainer');
+        const nameDisplay = document.getElementById('nameDisplay');
+        const storedName = localStorage.getItem('name');
+        
+        if (storedName) {
+            nameDisplay.textContent = `Name: ${storedName}`;
+        }
+        
+        const cuisinePreferencesDropdown = document.getElementById('cuisinePreferences');
+        
+        if (cookingExperience && cookingExperience._meals) {
+            for (const cuisine of cookingExperience._meals) {
+                const formattedCuisineName = cuisine.cuisine.replace(/([A-Z])/g, ' $1');
+                const option = document.createElement('option');
+                option.value = cuisine.cuisine;
+                option.text = formattedCuisineName;
+                cuisinePreferencesDropdown.appendChild(option);
+            }
+        }
+
+        function populateMealsDropdown() {
+            const selectedCuisine = cuisinePreferencesDropdown.value;
+            const mealsList = document.getElementById('mealsList');
+            mealsList.innerHTML = '';
+
+            if (cookingExperience && cookingExperience._meals) {
+                const selectedCuisineData = cookingExperience._meals.find(cuisine => cuisine.cuisine === selectedCuisine);
+
+                if (selectedCuisineData && selectedCuisineData.items) {
+                    for (const meal of selectedCuisineData.items) {
+                        const option = document.createElement('option');
+                        option.value = meal;
+                        option.text = meal;
+                        mealsList.appendChild(option);
+                    }
+                }
+            }
+        }
+
+        function populateMachinePreferencesCheckboxes() {
+            const machinePreferences = cookingExperience._machines;
+            const machinePreferencesContainer = document.getElementById('machinePreferences');
+            machinePreferencesContainer.innerHTML = '';
+
+            for (const machine of machinePreferences) {
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.textContent = machine;
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'machineCheckbox';
+                checkbox.value = machine;
+                checkboxLabel.appendChild(checkbox);
+
+                machinePreferencesContainer.appendChild(checkboxLabel);
+            }
+        }
+
+        populateMachinePreferencesCheckboxes();
+
+        const continueButton = document.getElementById('continueButton');
+        continueButton.addEventListener('click', function() {
+            const selectedCuisine = cuisinePreferencesDropdown.value;
+            const selectedMeal = mealsList.value;
+            const selectedMachines = Array.from(document.querySelectorAll('input[name="machineCheckbox"]:checked')).map(checkbox => checkbox.value);
+
+            localStorage.setItem('cuisinePreference', selectedCuisine);
+            localStorage.setItem('mealPreference', selectedMeal);
+            localStorage.setItem('machinePreference', JSON.stringify(selectedMachines));
+        });
+    </script>
+</body>
+</html>
